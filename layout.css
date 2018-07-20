@@ -1,0 +1,187 @@
+body {
+    min-width: 230px;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+.todoapp {
+    margin: 130px 0 40px 0;
+    position: relative;
+}
+
+.todoapp h1 {
+    position: absolute;
+    top: -155px;
+    text-align: center;
+    width: 100%;
+}
+
+.new-todo,
+.edit {
+    border: 1px solid #999;
+    box-sizing: border-box;
+    padding: 6px;
+    position: relative;
+    margin: 0;
+    width: 100%;
+}
+
+.new-todo {
+    border: none;
+    padding: 16px 16px 16px 60px;
+}
+
+.main {
+    position: relative;
+    z-index: 2;
+}
+
+label[for='toggle-all'] {
+    display: none;
+}
+
+.toggle-all {
+    position: absolute;
+    top: -55px;
+    left: -12px;
+    width: 60px;
+    height: 34px;
+    text-align: center;
+}
+
+.toggle-all:before {
+    padding: 10px 27px 10px 27px;
+}
+
+.todo-list {
+    margin: 0;
+    padding: 0;
+}
+
+.todo-list li {
+    position: relative;
+}
+
+.todo-list li .edit {
+    display: none; /* ! */
+    width: 506px;
+    padding: 13px 17px 12px 17px;
+    margin: 0 0 0 43px;
+}
+
+/*
+.todo-list li .view {
+    display: none;
+}
+*/
+
+.todo-list li .toggle {
+    text-align: center;
+    width: 40px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.todo-list li label {
+    padding: 15px 60px 15px 15px;
+    display: block;
+    margin-left: 45px;
+}
+
+.todo-list li .destroy {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+}
+
+.todo-list li:hover .destroy {
+    display: block;
+}
+
+.footer {
+    padding: 10px 15px;
+    height: 20px;
+}
+
+.footer:before {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    overflow: hidden;
+}
+
+.todo-count {
+    float: left;
+    text-align: left;
+}
+
+.filters {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+.filters li {
+    display: inline;
+}
+
+.filters li a {
+    margin: 3px;
+    padding: 3px 7px;
+}
+
+.clear-completed,
+html .clear-completed:active {
+    float: right;
+    position: relative;
+}
+
+header p {
+    margin-top: 10px;
+}
+
+header a :not(:last-child) {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.info {
+    margin: 65px auto 0;
+    text-align: center;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .todo-list li .toggle {
+        height: 40px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

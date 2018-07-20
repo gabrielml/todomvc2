@@ -6,14 +6,16 @@
 
 > Jesolo CodeCamp'18.
 
-Jesolo, Friday the 20th July
+##Jesolo, Friday the 20th July
 
  - First commit: "implement initial HTML & CSS mockup".
- - Second commit: "".
+ - Second commit: "Separate CSS from HTML".
 
-layout (posicionamiento) como los elementos están posicionados en la página
+###Separar el _index.css_ en 3 diferentes:
 
-theme - look & feel (aspecto)colores, fuentes, tamaño
+- **layout.css**: (posicionamiento) Como los elementos están posicionados en la página.
+- **theme.css**: _"look & feel"_ (aspecto) Colores, fuentes, tamaño.
+- **reset.css:** Pone a cero los valores por defecto de la app.
 
 ----
 

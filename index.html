@@ -2,71 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
-    <link rel="stylesheet" href="index.css">
+    <title>TodoMVC</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="theme.css">
 </head>
-<body class="learn-bar">
-    <section class="todoapp">
-        <div >
-            <header class="header">
-                <h1>todos</h1>
-                <input class="new-todo" placeholder="What needs to be done?">
-            </header>
-            <section class="main">
-                <input class="toggle-all" type="checkbox">
-                <ul class="todo-list">
-                    <li>
-                        <div class="view">
-                            <input class="toggle" type="checkbox">
-                            <label>Tarea1</label>
-                            <button class="destroy"></button>
-                        </div>
-                        <input class="edit" value="Tarea1">
-                    </li>
-                    <li class="completed">
-                        <div class="view">
-                            <input class="toggle" type="checkbox">
-                            <label>Tarea2</label>
-                            <button class="destroy"></button>
-                        </div>
-                        <input class="edit" value="Tarea2">
-                    </li>
-                </ul>
-            </section>
-            <footer class="footer">
-                <span class="todo-count">
-                    <strong>1</strong>
-                    <span> </span>
-                    <span>item</span>
-                    <span> left</span>
-                </span>
-                <ul class="filters">
-                    <li>
-                        <a href="#/" class="selected">All</a>
-                    </li>
-                    <span> </span>
-                    <li>
-                        <a href="#/active">Active</a>
-                    </li>
-                    <span> </span>
-                    <li>
-                        <a href="#/completed">Completed</a>
-                    </li>
-                </ul>
-                <button class="clear-completed">Clear completed</button>
-            </footer>
-        </div>
+<body>
+<section class="todoapp">
+    <header class="header">
+        <h1>todos</h1>
+        <input class="new-todo" placeholder="What needs to be done?">
+    </header>
+    <section class="main">
+        <input class="toggle-all" type="checkbox">
+        <ul class="todo-list">
+            <li>
+                <input class="toggle" type="checkbox">
+                <label>Tarea1</label>
+                <button class="destroy"></button>
+            </li>
+            <li class="completed">
+                <input class="toggle" type="checkbox">
+                <label>Tarea2</label>
+                <button class="destroy"></button>
+            </li>
+        </ul>
     </section>
-    <footer class="info">
-        <p>Double click to edit a todo</p>
-        <p>
-            "Created by "
-            <a href="#">Gabriel Mijares Lobato</a>
-        </p>
-        <p>
-            "Inspired by "
-            <a href="http://todomvc.com">TodoMVC</a>
-        </p>
+    <footer class="footer">
+        <span class="todo-count"><strong>1</strong> item left</span>
+        <ul class="filters">
+            <li>
+                <a href="#/" class="selected">All</a>
+            </li>
+            <li>
+                <a href="#/active">Active</a>
+            </li>
+            <li>
+                <a href="#/completed">Completed</a>
+            </li>
+        </ul>
+        <button class="clear-completed">Clear completed</button>
     </footer>
+</section>
+<footer class="info">
+    <p>Double click to edit a todo</p>
+    <p>"Created by "<a href="#">Gabriel Mijares Lobato</a></p>
+    <p>"Inspired by "<a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
 </body>
 </html>
