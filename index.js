@@ -1,17 +1,13 @@
 function addNewTodo(keyPressEvent) {
     if(keyPressEvent.key === 'Enter'){
         const sourceInputElement = keyPressEvent.target;
-        const doneToggleElement = document.createElement('input');
-        doneToggleElement.type = 'checkbox';
-        doneToggleElement.className = 'toggle';
-        const labelElement = document.createElement('label');
-        labelElement.textContent = sourceInputElement.value;
-        const buttonElement = document.createElement('button');
-        buttonElement.className = 'destroy';
+        const template = `
+            <input class="toggle" type="checkbox">
+            <label>${sourceInputElement.value}</label>
+            <button class="destroy"></button>
+        `;
         const newTodoElement = document.createElement('li');
-        newTodoElement.appendChild(doneToggleElement);
-        newTodoElement.appendChild(labelElement);
-        newTodoElement.appendChild(buttonElement);
+        newTodoElement.innerHTML = template;
         document.querySelector('.todo-list').appendChild(newTodoElement);
         sourceInputElement.value = '';
     }
