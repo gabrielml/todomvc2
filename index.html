@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="normalise.css">
     <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="theme.css">
+    <script src="index.js"></script>
 </head>
 <body>
 <section class="todoapp">
     <header class="header">
         <h1>todos</h1>
-        <input class="new-todo" placeholder="What needs to be done?">
+        <input class="new-todo" placeholder="What needs to be done?" onkeypress="addNewTodo(event)">
     </header>
     <section class="main">
         <input class="toggle-all" type="checkbox">
