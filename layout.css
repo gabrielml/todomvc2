@@ -23,17 +23,11 @@ button {
     width: 100%;
 }
 
-.new-todo,
-.edit {
-    border: 1px solid #999;
+.new-todo {
     box-sizing: border-box;
-    padding: 6px;
     position: relative;
     margin: 0;
     width: 100%;
-}
-
-.new-todo {
     border: none;
     padding: 16px 16px 16px 60px;
 }
@@ -41,10 +35,6 @@ button {
 .main {
     position: relative;
     z-index: 2;
-}
-
-label[for='toggle-all'] {
-    display: none;
 }
 
 .toggle-all {
@@ -56,10 +46,6 @@ label[for='toggle-all'] {
     text-align: center;
 }
 
-.toggle-all:before {
-    padding: 10px 27px 10px 27px;
-}
-
 .todo-list {
     margin: 0;
     padding: 0;
@@ -68,19 +54,6 @@ label[for='toggle-all'] {
 .todo-list li {
     position: relative;
 }
-
-.todo-list li .edit {
-    display: none; /* ! */
-    width: 506px;
-    padding: 13px 17px 12px 17px;
-    margin: 0 0 0 43px;
-}
-
-/*
-.todo-list li .view {
-    display: none;
-}
-*/
 
 .todo-list li .toggle {
     text-align: center;
@@ -118,15 +91,6 @@ label[for='toggle-all'] {
     height: 20px;
 }
 
-.footer:before {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 50px;
-    overflow: hidden;
-}
-
 .todo-count {
     float: left;
     text-align: left;
@@ -150,18 +114,9 @@ label[for='toggle-all'] {
 }
 
 .clear-completed,
-html .clear-completed:active {
+.clear-completed:active {
     float: right;
     position: relative;
-}
-
-header p {
-    margin-top: 10px;
-}
-
-header a :not(:last-child) {
-    margin-right: 5px;
-    margin-bottom: 5px;
 }
 
 .info {

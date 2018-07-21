@@ -41,21 +41,16 @@ input[type="checkbox"] {
     text-rendering: optimizeLegibility;
 }
 
-.new-todo,
-.edit {
+.new-todo {
     font-size: 24px;
     font-family: inherit;
     font-weight: inherit;
     line-height: 1.4em;
     outline: none;
     color: inherit;
-    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
-    -webkit-font-smoothing: antialiased;
-}
-
-.new-todo {
     background: rgba(0, 0, 0, 0.003);
     box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+    -webkit-font-smoothing: antialiased;
 }
 
 .main {
@@ -68,6 +63,7 @@ input[type="checkbox"] {
 
 .toggle-all:before {
     content: '❯';
+    padding: 10px 27px 10px 27px;
     font-size: 22px;
     color: #e6e6e6;
 }
@@ -137,6 +133,12 @@ input[type="checkbox"] {
 
 .footer:before {
     content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    overflow: hidden;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
     0 8px 0 -3px #f6f6f6,
     0 9px 1px -3px rgba(0, 0, 0, 0.2),
@@ -175,15 +177,6 @@ html .clear-completed:active {
     text-decoration: underline;
 }
 
-header p {
-    font-size: 30px;
-    line-height: 1.2;
-}
-
-header a {
-    font-weight: 200;
-}
-
 .info {
     color: #bfbfbf;
     font-size: 10px;
@@ -215,6 +208,5 @@ header a {
         transform: rotate(90deg);
         -webkit-appearance: none;
     }
-
 }
 
