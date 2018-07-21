@@ -23,6 +23,13 @@ function toggleTodo(id) {
     update();
 }
 
+function removeTodo(id){
+    const todoIndex = todoList.findIndex(todo => todo.id === id);
+
+    todoList.splice(todoIndex, 1);
+    update();
+}
+
 function update() {
     const todoListElement = document.querySelector('.todo-list');
 
@@ -37,7 +44,7 @@ function update() {
         const template = `
             <input class="toggle" type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${todo.id})">
             <label>${todo.description}</label>
-            <button class="destroy"></button>
+            <button class="destroy" onclick="removeTodo(${todo.id})"></button>
         `;
         const todoElement = document.createElement('li');
 
