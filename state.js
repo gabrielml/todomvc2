@@ -20,7 +20,17 @@ function addNewTodoAction(description) {
 function toggleTodoAction(id) {
     state = {
         ...state,
-        todos: state.todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo),
+        todos: state.todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo)
+    };
+    history.push(state);
+}
+
+function toggleAllAction() {
+    const newState = state.todos.some(todo => !todo.completed);
+
+    state = {
+        ...state,
+        todos: state.todos.map(todo => ({...todo, completed: newState}))
     };
     history.push(state);
 }
@@ -28,7 +38,7 @@ function toggleTodoAction(id) {
 function removeTodoAction(id) {
     state = {
         ...state,
-        todos: state.todos.filter(todo => todo.id !== id),
+        todos: state.todos.filter(todo => todo.id !== id)
     };
     history.push(state);
 }
@@ -36,7 +46,7 @@ function removeTodoAction(id) {
 function removeCompletedTodosAction() {
     state = {
         ...state,
-        todos: state.todos.filter(todo => !todo.completed),
+        todos: state.todos.filter(todo => !todo.completed)
     };
     history.push(state);
 }

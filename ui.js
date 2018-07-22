@@ -13,6 +13,11 @@ function toggleTodo(id) {
     update();
 }
 
+function toggleAll() {
+    toggleAllAction();
+    update();
+}
+
 function removeTodo(id) {
     removeTodoAction(id);
     update();
