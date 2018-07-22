@@ -23,11 +23,20 @@ function toggleTodo(id) {
     update();
 }
 
-function removeTodo(id){
+function removeTodo(id) {
     const todoIndex = todoList.findIndex(todo => todo.id === id);
 
     todoList.splice(todoIndex, 1);
     update();
+}
+
+function removeCompletedTodos() {
+    todoList.forEach((todo, todoIndex) => {
+        if (todo.completed) {
+            todoList.splice(todoIndex, 1);
+        }
+        update();
+    });
 }
 
 function update() {
