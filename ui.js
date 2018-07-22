@@ -27,7 +27,7 @@ function update() {
     const todoListElement = document.querySelector('.todo-list');
 
     todoListElement.innerHTML = null;
-    todoList.forEach(todo => {
+    state.todos.forEach(todo => {
         const newTodoElement = createTodoElement(todo);
 
         todoListElement.appendChild(newTodoElement);
