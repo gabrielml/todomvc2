@@ -2,31 +2,41 @@ const mockTodos = [
     {id: 0, completed: false, description: 'Tarea1'},
     {id: 1, completed: true, description: 'Tarea2'}
 ];
-const state = {
+let state = {
     todos: mockTodos,
     nextId: mockTodos.length
 };
+const history = [state];
 
 function addNewTodoAction(description) {
-    state.todos.push({id: state.nextId++, completed: false, description: description});
+    state = {
+        ...state,
+        todos: [...state.todos, {id: state.nextId + 1, completed: false, description: description}],
+        nextId: state.nextId + 1
+    };
+    history.push(state);
 }
 
 function toggleTodoAction(id) {
-    const todo = state.todos.find(todo => todo.id === id);
-
-    todo.completed = !todo.completed;
+    state = {
+        ...state,
+        todos: state.todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo),
+    };
+    history.push(state);
 }
 
 function removeTodoAction(id) {
-    const todoIndex = state.todos.findIndex(todo => todo.id === id);
-
-    state.todos.splice(todoIndex, 1);
+    state = {
+        ...state,
+        todos: state.todos.filter(todo => todo.id !== id),
+    };
+    history.push(state);
 }
 
 function removeCompletedTodosAction() {
-    state.todos.forEach((todo, todoIndex, todos) => {
-        if (todo.completed) {
-            todos.splice(todoIndex, 1);
-        }
-    });
+    state = {
+        ...state,
+        todos: state.todos.filter(todo => !todo.completed),
+    };
+    history.push(state);
 }
