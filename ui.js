@@ -29,26 +29,39 @@ function removeCompletedTodos() {
 }
 
 function update() {
-    const todoListElement = document.querySelector('.todo-list');
+    updateTodoCount();
+    updateTodoList();
 
-    todoListElement.innerHTML = null;
-    state.todos.forEach(todo => {
-        const newTodoElement = createTodoElement(todo);
+    function updateTodoCount() {
+        const todoCountElement = document.querySelector('.todo-count');
+        const todoCount = state.todos.filter(todo => !todo.completed).length;
 
-        todoListElement.appendChild(newTodoElement);
-    });
+        todoCountElement.innerHTML = `<strong>${todoCount}</strong> ${todoCount === 1 ? 'item' : 'items'} left`;
+    }
 
-    function createTodoElement(todo) {
-        const template = `
+    function updateTodoList() {
+        const todoListElement = document.querySelector('.todo-list');
+
+        todoListElement.innerHTML = null;
+        state.todos.forEach(todo => {
+            const newTodoElement = createTodoElement(todo);
+
+            todoListElement.appendChild(newTodoElement);
+        });
+
+        function createTodoElement(todo) {
+            const template = `
             <input class="toggle" type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${todo.id})">
             <label>${todo.description}</label>
             <button class="destroy" onclick="removeTodo(${todo.id})"></button>
         `;
-        const todoElement = document.createElement('li');
+            const todoElement = document.createElement('li');
 
-        todoElement.className = todo.completed ? 'completed' : undefined;
-        todoElement.innerHTML = template;
+            todoElement.className = todo.completed ? 'completed' : undefined;
+            todoElement.innerHTML = template;
 
-        return todoElement;
+            return todoElement;
+        }
     }
 }
+
