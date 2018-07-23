@@ -124,6 +124,10 @@ button {
     text-align: center;
 }
 
+.hidden {
+    display: none;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
     .todo-list li .toggle {
         height: 40px;

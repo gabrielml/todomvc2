@@ -28,7 +28,7 @@ function removeCompletedTodos() {
     update();
 }
 
-function setFilter(filter){
+function setFilter(filter) {
     setFilterAction(filter);
     update();
 }
@@ -37,6 +37,7 @@ function update() {
     updateTodoCount();
     updateTodoList();
     updateFilters();
+    updateClearCompleted();
 
     function updateTodoCount() {
         const todoCountElement = document.querySelector('.todo-count');
@@ -86,6 +87,18 @@ function update() {
         const ulFilters = document.querySelector('.filters');
         ulFilters.innerHTML = template;
     }
+
+    function updateClearCompleted() {
+        const isVisible = state.todos.some(completedTodosPredicate);
+        const clearCompletedElement = document.querySelector('.clear-completed');
+
+        if (isVisible) {
+            clearCompletedElement.classList.remove('hidden');
+        } else {
+            clearCompletedElement.classList.add('hidden');
+        }
+    }
 }
+
 
 
