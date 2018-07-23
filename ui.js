@@ -28,9 +28,15 @@ function removeCompletedTodos() {
     update();
 }
 
+function setFilter(filter){
+    setFilterAction(filter);
+    update();
+}
+
 function update() {
     updateTodoCount();
     updateTodoList();
+    updateFilters();
 
     function updateTodoCount() {
         const todoCountElement = document.querySelector('.todo-count');
@@ -43,7 +49,7 @@ function update() {
         const todoListElement = document.querySelector('.todo-list');
 
         todoListElement.innerHTML = null;
-        state.todos.forEach(todo => {
+        state.visibleTodos.forEach(todo => {
             const newTodoElement = createTodoElement(todo);
 
             todoListElement.appendChild(newTodoElement);
@@ -63,5 +69,23 @@ function update() {
             return todoElement;
         }
     }
+
+    function updateFilters() {
+        const selectedClass = 'class="selected"';
+        const template = `
+            <li>
+                <a ${state.filter === ALL ? selectedClass : ''} href="#" onclick="setFilter(ALL)">All</a>
+            </li>
+            <li>
+                <a ${state.filter === ACTIVE ? selectedClass : ''} href="#active" onclick="setFilter(ACTIVE)">Active</a>
+            </li>
+            <li>
+                <a ${state.filter === COMPLETED ? selectedClass : ''} href="#completed" onclick="setFilter(COMPLETED)">Completed</a>
+            </li>
+        `;
+        const ulFilters = document.querySelector('.filters');
+        ulFilters.innerHTML = template;
+    }
 }
+
 
