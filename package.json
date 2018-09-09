@@ -1,0 +1,23 @@
+{
+  "name": "todomvc2",
+  "version": "1.0.0",
+  "description": "todo application",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "dev": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielml/todomvc2.git"
+  },
+  "author": "Gabriel Mijares <gabrielmljob@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrielml/todomvc2/issues"
+  },
+  "homepage": "https://github.com/gabrielml/todomvc2#readme",
+  "devDependencies": {
+    "jest-cli": "23.5.0"
+  }
+}
