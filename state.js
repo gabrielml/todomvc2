@@ -1,97 +1,69 @@
-const ALL = '';
-const ACTIVE = '#active';
-const COMPLETED = '#completed';
-const allTodosPredicate = () => true;
-const activeTodosPredicate = todo => !todo.completed;
-const completedTodosPredicate = todo => todo.completed;
-const mockTodos = [
-    {id: 0, completed: false, description: 'Tarea1'},
-    {id: 1, completed: true, description: 'Tarea2'}
-];
-let state = {
-    todos: mockTodos,
-    nextId: mockTodos.length,
-    visibleTodos: getVisibleTodos(mockTodos, window.location.hash),
-    filter: window.location.hash
-};
-const history = [state];
+let nextId = 0;
 
-function addNewTodoAction(description) {
-    const todos = [...state.todos, {id: state.nextId + 1, completed: false, description: description}];
+const FILTER_ALL = 'ALL';
+const FILTER_COMPLETED = 'COMPLETED';
+const FILTER_NOT_COMPLETED = 'NOT_COMPLETED';
 
-    state = {
-        ...state,
-        todos: todos,
-        nextId: state.nextId + 1,
-        visibleTodos: getVisibleTodos(todos, state.filter)
-    };
-    history.push(state);
-}
+exports.FILTER_ALL = FILTER_ALL;
+exports.FILTER_COMPLETED = FILTER_COMPLETED;
+exports.FILTER_NOT_COMPLETED = FILTER_NOT_COMPLETED;
 
-function toggleTodoAction(id) {
-    const todos = state.todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo);
+exports.reducer = (state = {}, action) => {
+    let todos;
+    let filter;
 
-    state = {
-        ...state,
-        todos: todos,
-        visibleTodos: getVisibleTodos(todos, state.filter)
-    };
-    history.push(state);
-}
+    switch (action.type) {
+        case 'ADD_TODO':
+            todos = [...(state.todos || []), {
+                id: nextId++,
+                completed: false,
+                text: action.payload
+            }];
+            filter = state.filter || FILTER_ALL;
 
-function toggleAllAction() {
-    const newState = state.todos.some(activeTodosPredicate);
-    const todos = state.todos.map(todo => ({...todo, completed: newState}));
+            return createState(todos, filter);
+        case 'REMOVE_TODO':
+            todos = (state.todos || []).filter(todo => todo.id !== action.payload);
+            filter = state.filter;
 
-    state = {
-        ...state,
-        todos: todos,
-        visibleTodos: getVisibleTodos(todos, state.filter)
-    };
-    history.push(state);
-}
+            return createState(todos, filter);
+        case 'TOGGLE_TODO':
+            todos = (state.todos || []).map(todo => todo.id === action.payload ?
+                {...todo, completed: !todo.completed} : todo);
+            filter = state.filter;
 
-function removeTodoAction(id) {
-    const todos = state.todos.filter(todo => todo.id !== id);
+            return createState(todos, filter);
+        case 'FILTER_TODOS':
+            todos = state.todos || [];
+            filter = action.payload;
 
-    state = {
-        ...state,
-        todos: todos,
-        visibleTodos: getVisibleTodos(todos, state.filter)
-    };
-    history.push(state);
-}
-
-function removeCompletedTodosAction() {
-    const todos = state.todos.filter(activeTodosPredicate);
-    state = {
-        ...state,
-        todos: todos,
-        visibleTodos: getVisibleTodos(todos, state.filter)
-    };
-    history.push(state);
-}
-
-function setFilterAction(filter) {
-    state = {
-        ...state,
-        visibleTodos: getVisibleTodos(state.todos, filter),
-        filter: filter
-    };
-    history.push(state);
-}
-
-function getVisibleTodos(todos, filterName) {
-    const filterPredicatesByName = {
-        [ALL]: allTodosPredicate,
-        [ACTIVE]: activeTodosPredicate,
-        [COMPLETED]: completedTodosPredicate
-    };
-    const filterPredicate = filterPredicatesByName[filterName];
-
-    if (filterPredicate === undefined) {
-        throw new Error(`Filter value: '${filter}' not supported.`);
+            return createState(todos, filter);
+        default:
+            return state;
     }
+};
 
-    return todos.filter(filterPredicate);
+function createState(todos, filter) {
+    return {
+        todos,
+        filter,
+        filteredTodos: getFilteredTodos(todos, filter)
+    };
+}
+
+function getFilteredTodos(todos, filter) {
+    return todos.filter(getFilterPredicate(filter));
+}
+
+function getFilterPredicate(filterId) {
+    switch (filterId) {
+        case FILTER_ALL:
+            return () => true;
+        case FILTER_COMPLETED:
+            return todo => todo.completed;
+        case FILTER_NOT_COMPLETED:
+            return todo => !todo.completed;
+        default:
+            throw new Error(`Filter not supported: '${filterId}'`);
+    }
 }
