@@ -1,14 +1,15 @@
-let nextId = 0;
-
 const FILTER_ALL = 'ALL';
 const FILTER_COMPLETED = 'COMPLETED';
 const FILTER_NOT_COMPLETED = 'NOT_COMPLETED';
 
-exports.FILTER_ALL = FILTER_ALL;
-exports.FILTER_COMPLETED = FILTER_COMPLETED;
-exports.FILTER_NOT_COMPLETED = FILTER_NOT_COMPLETED;
+let nextId = 0;
+let state = {
+    todos: [],
+    filteredTodos: [],
+    filter: FILTER_ALL
+};
 
-exports.reducer = (state = {}, action) => {
+function reducer(state = {}, action) {
     let todos;
     let filter;
 
@@ -27,9 +28,21 @@ exports.reducer = (state = {}, action) => {
             filter = state.filter;
 
             return createState(todos, filter);
+        case 'REMOVE_COMPLETED_TODOS':
+            todos = (state.todos || []).filter(todo => todo.completed === false);
+            filter = state.filter;
+
+            return createState(todos, filter);
         case 'TOGGLE_TODO':
             todos = (state.todos || []).map(todo => todo.id === action.payload ?
                 {...todo, completed: !todo.completed} : todo);
+            filter = state.filter;
+
+            return createState(todos, filter);
+        case 'TOGGLE_ALL':
+            const newState = state.todos.some(todo => !todo.completed);
+
+            todos = (state.todos || []).map(todo => ({...todo, completed: newState}));
             filter = state.filter;
 
             return createState(todos, filter);
