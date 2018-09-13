@@ -1,12 +1,22 @@
-const FILTER_ALL = 'ALL';
-const FILTER_COMPLETED = 'COMPLETED';
-const FILTER_NOT_COMPLETED = 'NOT_COMPLETED';
+const ALL_FILTER = 'ALL';
+const COMPLETED_FILTER = 'COMPLETED';
+const NOT_COMPLETED_FILTER = 'NOT_COMPLETED';
+
+const ADD_TODO_ACTION = 'ADD_TODO';
+const REMOVE_TODO_ACTION = 'REMOVE_TODO';
+const REMOVE_COMPLETED_TODOS_ACTION = 'REMOVE_COMPLETED_TODOS';
+const TOGGLE_TODO_ACTION = 'TOGGLE_TODO';
+const TOGGLE_ALL_ACTION = 'TOGGLE_ALL';
+const FILTER_TODOS_ACTION = 'FILTER_TODOS';
+
+const notCompletedTodosPredicate = todo => !todo.completed;
+const completedTodosPredicate = todo => todo.completed;
 
 let nextId = 0;
 let state = {
     todos: [],
     filteredTodos: [],
-    filter: FILTER_ALL
+    filter: ALL_FILTER
 };
 
 function reducer(state = {}, action) {
@@ -14,16 +24,16 @@ function reducer(state = {}, action) {
     let filter;
 
     switch (action.type) {
-        case 'ADD_TODO':
+        case ADD_TODO_ACTION:
             todos = [...(state.todos || []), {
                 id: nextId++,
                 completed: false,
                 text: action.payload
             }];
-            filter = state.filter || FILTER_ALL;
+            filter = state.filter || ALL_FILTER;
 
             return createState(todos, filter);
-        case 'REMOVE_TODO':
+        case REMOVE_TODO_ACTION:
             todos = (state.todos || []).filter(todo => todo.id !== action.payload);
             filter = state.filter;
 
@@ -33,20 +43,20 @@ function reducer(state = {}, action) {
             filter = state.filter;
 
             return createState(todos, filter);
-        case 'TOGGLE_TODO':
+        case TOGGLE_TODO_ACTION:
             todos = (state.todos || []).map(todo => todo.id === action.payload ?
                 {...todo, completed: !todo.completed} : todo);
             filter = state.filter;
 
             return createState(todos, filter);
-        case 'TOGGLE_ALL':
-            const newState = state.todos.some(todo => !todo.completed);
+        case TOGGLE_ALL_ACTION:
+            const newState = state.todos.some(notCompletedTodosPredicate);
 
             todos = (state.todos || []).map(todo => ({...todo, completed: newState}));
             filter = state.filter;
 
             return createState(todos, filter);
-        case 'FILTER_TODOS':
+        case FILTER_TODOS_ACTION:
             todos = state.todos || [];
             filter = action.payload;
 
@@ -54,7 +64,7 @@ function reducer(state = {}, action) {
         default:
             return state;
     }
-};
+}
 
 function createState(todos, filter) {
     return {
@@ -70,12 +80,12 @@ function getFilteredTodos(todos, filter) {
 
 function getFilterPredicate(filterId) {
     switch (filterId) {
-        case FILTER_ALL:
+        case ALL_FILTER:
             return () => true;
-        case FILTER_COMPLETED:
-            return todo => todo.completed;
-        case FILTER_NOT_COMPLETED:
-            return todo => !todo.completed;
+        case COMPLETED_FILTER:
+            return completedTodosPredicate;
+        case NOT_COMPLETED_FILTER:
+            return notCompletedTodosPredicate;
         default:
             throw new Error(`Filter not supported: '${filterId}'`);
     }

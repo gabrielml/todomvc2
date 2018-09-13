@@ -2,7 +2,7 @@ function addNewTodo(keyPressEvent) {
     if (keyPressEvent.key === 'Enter') {
         const sourceInputElement = keyPressEvent.target;
 
-        state = reducer(state, {type: 'ADD_TODO', payload: sourceInputElement.value});
+        state = reducer(state, {type: ADD_TODO_ACTION, payload: sourceInputElement.value});
         update();
         sourceInputElement.value = '';
     }
@@ -10,7 +10,7 @@ function addNewTodo(keyPressEvent) {
 
 function toggleTodo(id) {
     state = reducer(state, {
-        type: 'TOGGLE_TODO',
+        type: TOGGLE_TODO_ACTION,
         payload: id
     });
     update();
@@ -18,14 +18,14 @@ function toggleTodo(id) {
 
 function toggleAll() {
     state = reducer(state, {
-        type: 'TOGGLE_ALL'
+        type: TOGGLE_ALL_ACTION
     });
     update();
 }
 
 function removeTodo(id) {
     state = reducer(state, {
-        type: 'REMOVE_TODO',
+        type: REMOVE_TODO_ACTION,
         payload: id
     });
     update();
@@ -33,14 +33,14 @@ function removeTodo(id) {
 
 function removeCompletedTodos() {
     state = reducer(state, {
-        type: 'REMOVE_COMPLETED_TODOS'
+        type: REMOVE_COMPLETED_TODOS_ACTION
     });
     update();
 }
 
 function setFilter(filter) {
     state = reducer(state, {
-       type: 'FILTER_TODOS',
+       type: FILTER_TODOS_ACTION,
        payload: filter
     });
     update();
@@ -88,13 +88,13 @@ function update() {
         const selectedClass = 'class="selected"';
         const template = `
             <li>
-                <a ${state.filter === FILTER_ALL ? selectedClass : ''} href="#" onclick="setFilter(FILTER_ALL)">All</a>
+                <a ${state.filter === ALL_FILTER ? selectedClass : ''} href="#" onclick="setFilter(ALL_FILTER)">All</a>
             </li>
             <li>
-                <a ${state.filter === FILTER_NOT_COMPLETED ? selectedClass : ''} href="#active" onclick="setFilter(FILTER_NOT_COMPLETED)">Active</a>
+                <a ${state.filter === NOT_COMPLETED_FILTER ? selectedClass : ''} href="#active" onclick="setFilter(NOT_COMPLETED_FILTER)">Active</a>
             </li>
             <li>
-                <a ${state.filter === FILTER_COMPLETED ? selectedClass : ''} href="#completed" onclick="setFilter(FILTER_COMPLETED)">Completed</a>
+                <a ${state.filter === COMPLETED_FILTER ? selectedClass : ''} href="#completed" onclick="setFilter(COMPLETED_FILTER)">Completed</a>
             </li>
         `;
         const ulFilters = document.querySelector('.filters');
