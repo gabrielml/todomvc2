@@ -38,8 +38,8 @@ function reducer(state = {}, action) {
             filter = state.filter;
 
             return createState(todos, filter);
-        case 'REMOVE_COMPLETED_TODOS':
-            todos = (state.todos || []).filter(todo => todo.completed === false);
+        case REMOVE_COMPLETED_TODOS_ACTION:
+            todos = (state.todos || []).filter(notCompletedTodosPredicate);
             filter = state.filter;
 
             return createState(todos, filter);
