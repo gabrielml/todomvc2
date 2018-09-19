@@ -1,4 +1,4 @@
-(function (exports) {
+(function (globalScope) {
 
     const ALL_FILTER = 'ALL';
     const COMPLETED_FILTER = 'COMPLETED';
@@ -15,23 +15,22 @@
     const completedTodosPredicate = todo => todo.completed;
 
     let nextId = 0;
-    let state = {
+
+    globalScope.state = {
         todos: [],
         filteredTodos: [],
         filter: ALL_FILTER
     };
-
-    exports.state = state;
-    exports.ALL_FILTER = ALL_FILTER;
-    exports.NOT_COMPLETED_FILTER = NOT_COMPLETED_FILTER;
-    exports.COMPLETED_FILTER = COMPLETED_FILTER;
-    exports.reducer = reducer;
-    exports.ADD_TODO_ACTION = ADD_TODO_ACTION;
-    exports.REMOVE_TODO_ACTION = REMOVE_TODO_ACTION;
-    exports.REMOVE_COMPLETED_TODOS_ACTION = REMOVE_COMPLETED_TODOS_ACTION;
-    exports.TOGGLE_TODO_ACTION = TOGGLE_TODO_ACTION;
-    exports.TOGGLE_ALL_ACTION = TOGGLE_ALL_ACTION;
-    exports.FILTER_TODOS_ACTION = FILTER_TODOS_ACTION;
+    globalScope.reducer = reducer;
+    globalScope.ALL_FILTER = ALL_FILTER;
+    globalScope.NOT_COMPLETED_FILTER = NOT_COMPLETED_FILTER;
+    globalScope.COMPLETED_FILTER = COMPLETED_FILTER;
+    globalScope.ADD_TODO_ACTION = ADD_TODO_ACTION;
+    globalScope.REMOVE_TODO_ACTION = REMOVE_TODO_ACTION;
+    globalScope.REMOVE_COMPLETED_TODOS_ACTION = REMOVE_COMPLETED_TODOS_ACTION;
+    globalScope.TOGGLE_TODO_ACTION = TOGGLE_TODO_ACTION;
+    globalScope.TOGGLE_ALL_ACTION = TOGGLE_ALL_ACTION;
+    globalScope.FILTER_TODOS_ACTION = FILTER_TODOS_ACTION;
 
     function reducer(state = {}, action) {
         let todos;
@@ -104,5 +103,4 @@
                 throw new Error(`Filter not supported: '${filterId}'`);
         }
     }
-})
-(window || globalScope);
+})(typeof exports === 'object' ? exports : window);

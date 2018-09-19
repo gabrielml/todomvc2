@@ -1,5 +1,9 @@
-require('./state');
-//const {reducer, FILTER_ALL, FILTER_COMPLETED, FILTER_NOT_COMPLETED} = state;
+const state = require('./state');
+const {
+    reducer, ALL_FILTER, COMPLETED_FILTER, NOT_COMPLETED_FILTER,
+    ADD_TODO_ACTION, REMOVE_TODO_ACTION, REMOVE_COMPLETED_TODOS_ACTION,
+    TOGGLE_TODO_ACTION, TOGGLE_ALL_ACTION, FILTER_TODOS_ACTION
+} = state;
 
 describe('state reducer', () => {
     it('should add a new todo when the action is ADD_TODO_ACTION and there are no Todos', () => {
